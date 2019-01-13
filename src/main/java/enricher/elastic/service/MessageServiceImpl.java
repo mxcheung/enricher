@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import enricher.datastream.inbound.dto.Employee;
+import enricher.datastream.inbound.dto.Payload;
 import enricher.datastream.outbound.dto.EnrichedMessage;
 import enricher.elastic.domain.MessageDoc;
 import enricher.elastic.repository.MessageDocRepository;
@@ -33,14 +34,14 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public EnrichedMessage save(Employee employee) throws JsonProcessingException {
+	public EnrichedMessage save(Payload payload) throws JsonProcessingException {
 		
-		String json = mapper.writeValueAsString(employee);
-		MessageDoc messageDoc = messageDocRepository.findByName(employee.getName());
+		String json = mapper.writeValueAsString(payload);
+		MessageDoc messageDoc = messageDocRepository.findByName(payload.getName());
 		String status = "New";
 		if (messageDoc == null) {
 			messageDoc = new MessageDoc();
-			messageDoc.setName(employee.getName());
+			messageDoc.setName(payload.getName());
 			messageDoc.setMessage(json);
 			status = "New";
 			messageDocRepository.save(messageDoc);
@@ -55,7 +56,7 @@ public class MessageServiceImpl implements MessageService {
 		}
 		EnrichedMessage enrichedMessage = new  EnrichedMessage();
 		enrichedMessage.setStatus(status);
-		enrichedMessage.setPayload(employee);
+		enrichedMessage.setPayload(payload);
 		enrichedMessage.setMessageDoc(messageDoc);
 		return enrichedMessage;
 	}

@@ -1,13 +1,13 @@
 package enricher.datastream.outbound.dto;
 
-import enricher.datastream.inbound.dto.Employee;
+import enricher.datastream.inbound.dto.Payload;
 import enricher.elastic.domain.MessageDoc;
 
 public class EnrichedMessage {
 	
 	private String status;
 
-	private Employee payload;
+	private Payload payload;
 	
 	private MessageDoc messageDoc;
 
@@ -19,11 +19,11 @@ public class EnrichedMessage {
 		this.status = status;
 	}
 
-	public Employee getPayload() {
+	public Payload getPayload() {
 		return payload;
 	}
 
-	public void setPayload(Employee payload) {
+	public void setPayload(Payload payload) {
 		this.payload = payload;
 	}
 
@@ -34,6 +34,7 @@ public class EnrichedMessage {
 	public void setMessageDoc(MessageDoc messageDoc) {
 		this.messageDoc = messageDoc;
 	}
+
 
 
 	
