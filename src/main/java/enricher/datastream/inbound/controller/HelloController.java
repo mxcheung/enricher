@@ -1,4 +1,4 @@
-package enricher.service.controller;
+package enricher.datastream.inbound.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
